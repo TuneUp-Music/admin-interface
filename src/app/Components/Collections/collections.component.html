@@ -1,7 +1,18 @@
-<div *ngIf="collections; else loading">
-	<div *ngFor="let collection of collections">{{ collection.title }}</div>
+<div *ngIf="collections; else loading" class="flex flex-col h-full">
+  <ag-grid-angular
+    style="height: 100%"
+    [class]="themeClass"
+    [rowData]="collections"
+    [columnDefs]="colDefs"
+  >
+  </ag-grid-angular>
+</div>
+<ng-template #loading>
+  <div *ngIf="errorMessage" class="text-white">{{ errorMessage }}</div>
+  <div
+    *ngIf="!errorMessage"
+    class="text-white h-full flex justify-center items-center"
+  >
+    <ns-spinner class="" />
   </div>
-  <ng-template #loading>
-	<div *ngIf="errorMessage">{{ errorMessage }}</div>
-	<div *ngIf="!errorMessage">Loading...</div>
-  </ng-template>
+</ng-template>

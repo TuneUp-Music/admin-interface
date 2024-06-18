@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { catchError, Observable, throwError } from "rxjs";
 import { environment } from "../../environments/environment";
+import { Collection } from "../Models/collection.model";
 
 @Injectable({
   providedIn: "root",
@@ -37,7 +38,7 @@ export class DataService {
   // }
 
   getCollections(): Observable<any> {
-    return this.get<any>("collection/all");
+    return this.get<Collection[]>("collection/all");
   }
 
   getTokens(): Observable<any> {

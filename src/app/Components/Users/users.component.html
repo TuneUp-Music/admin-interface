@@ -1,0 +1,7 @@
+<div *ngIf="users; else loading">
+	<div *ngFor="let user of users">{{ user.username }}</div>
+  </div>
+  <ng-template #loading>
+	<div *ngIf="errorMessage">{{ errorMessage }}</div>
+	<div *ngIf="!errorMessage">Loading...</div>
+  </ng-template>

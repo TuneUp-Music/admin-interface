@@ -1,0 +1,9 @@
+<div *ngIf="races.length > 0; else loading">
+	<h2>Races</h2>
+	<ul>
+		<li *ngFor="let race of races">{{ race.name }}</li>
+	</ul>
+</div>
+<ng-template #loading>
+	<h2>Loading...</h2>
+</ng-template>

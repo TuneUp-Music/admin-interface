@@ -1,0 +1,7 @@
+<div *ngIf="collections; else loading">
+	<div *ngFor="let collection of collections">{{ collection.title }}</div>
+  </div>
+  <ng-template #loading>
+	<div *ngIf="errorMessage">{{ errorMessage }}</div>
+	<div *ngIf="!errorMessage">Loading...</div>
+  </ng-template>

@@ -10,11 +10,9 @@
   </ag-grid-angular>
 </div>
 <ng-template #spinner>
-  <div *ngIf="errorMessage" class="text-white">{{ errorMessage }}</div>
   <div
-    *ngIf="!errorMessage"
-    class="text-white h-full flex justify-center items-center"
+    class="h-full w-full flex pr-6 bg-slate-800 rounded-md justify-center items-center"
   >
-    <ns-spinner class="" />
+    <ns-spinner />
   </div>
 </ng-template>

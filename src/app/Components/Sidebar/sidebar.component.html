@@ -2,19 +2,50 @@
   rel="stylesheet"
   href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
 />
+<style>
+  @keyframes pulse {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.5;
+    }
+  }
+
+  .animate-pulse {
+    animation: pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+</style>
 <div class="w-64 h-screen bg-slate-800 flex flex-col">
-  <img
-    [src]="
-      user?.profile_picture
-        ? user.profile_picture
-        : 'https://pbs.twimg.com/media/FjU2lkcWYAgNG6d.jpg'
-    "
-    alt="User Profile"
-    class="rounded-full w-20 h-20 mt-5 mx-auto"
-  />
-  <h1 class="text-white text-center mt-2 text-xl font-bold">
-    {{ user?.username }}
-  </h1>
+  <!-- Image skeleton loader -->
+  <div
+    *ngIf="loading; else profilePicture"
+    class="animate-pulse rounded-full w-20 h-20 mt-5 mx-auto bg-slate-700"
+  ></div>
+  <ng-template #profilePicture>
+    <img
+      [src]="
+        user?.profile_picture
+          ? user.profile_picture
+          : 'https://pbs.twimg.com/media/FjU2lkcWYAgNG6d.jpg'
+      "
+      alt="User Profile"
+      class="rounded-full w-20 h-20 mt-5 mx-auto"
+    />
+  </ng-template>
+
+  <!-- Username skeleton loader -->
+  <div
+    *ngIf="loading; else username"
+    class="h-6 bg-slate-700 rounded mt-2 mx-auto w-32 animate-pulse"
+  ></div>
+  <ng-template #username>
+    <h1 class="text-white text-center mt-2 text-xl font-bold">
+      {{ user?.username }}
+    </h1>
+  </ng-template>
+
   <h2 class="text-green-300 text-center mt-1 text-md">Admin</h2>
   <button
     [routerLink]="['/']"

@@ -26,6 +26,7 @@ export class SidebarComponent {
   currentUrl!: string;
   user: any = null;
   errorMessage: string | null = null;
+  loading = false;
 
   sidebarItems: SidebarItems = {
     Data: [
@@ -57,17 +58,17 @@ export class SidebarComponent {
   }
 
   ngOnInit() {
-    // this.loading = true;
+    this.loading = true;
     this.dataService.getUser().subscribe({
       next: (data: any) => {
         this.user = data;
         this.errorMessage = null;
-        // this.loading = false;
+        this.loading = false;
       },
       error: (e: any) => {
         this.errorMessage = e.message;
         this.user = null;
-        // this.loading = false;
+        this.loading = false;
       },
     });
   }

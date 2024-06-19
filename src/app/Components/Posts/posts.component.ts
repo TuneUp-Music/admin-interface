@@ -6,36 +6,32 @@ import { ColDef } from "ag-grid-community";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-quartz.css";
 import { SpinnerComponent } from "../Spinner/spinner.component";
-import { Collection } from "../../Models/collection.model";
+import { Post } from "../../Models/post.model";
 
 @Component({
-  selector: "ns-collections",
-  templateUrl: "./collections.component.html",
+  selector: "ns-posts",
+  templateUrl: "./posts.component.html",
   standalone: true,
   imports: [CommonModule, AgGridAngular, SpinnerComponent],
 })
-export class CollectionsComponent implements OnInit {
-  collections: Collection[] = [];
+export class PostsComponent implements OnInit {
+  posts: Post[] = [];
   errorMessage: string | null = null;
   loading = false;
   colDefs: ColDef[] = [];
   themeClass = "ag-theme-quartz-dark";
 
-  CollectionKeys = [
-    "id",
+  PostKeys = [
+    "_id",
     "title",
-    "description",
-    "status",
-    "banner",
-    "creation_date",
+    "content",
     "publication_date",
-    "remaining_tokens",
-    "token_quantity",
-    "floor_price",
-    "image_url",
+    "link",
+    "media",
+    "views",
+    "likes",
+    "author",
     "tags",
-    // "history",
-    // "rewards",
   ];
 
   defaultColDef = {
@@ -51,15 +47,15 @@ export class CollectionsComponent implements OnInit {
 
   ngOnInit() {
     this.loading = true;
-    this.dataService.getCollections().subscribe({
+    this.dataService.getPosts().subscribe({
       next: (data) => {
-        this.collections = data;
+        this.posts = data;
         this.errorMessage = null;
         this.loading = false;
       },
       error: (e) => {
         this.errorMessage = e.message;
-        this.collections = [];
+        this.posts = [];
         this.loading = false;
       },
     });
@@ -67,8 +63,8 @@ export class CollectionsComponent implements OnInit {
   }
 
   generateColDefs(): void {
-    this.colDefs = this.CollectionKeys.map((key, value) => ({
-      checkboxSelection: key === "id" ? true : false,
+    this.colDefs = this.PostKeys.map((key, value) => ({
+      checkboxSelection: key === "_	id" ? true : false,
       field: key as string,
       headerName: this.formatHeaderName(key),
     }));

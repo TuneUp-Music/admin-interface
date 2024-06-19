@@ -6,6 +6,7 @@ import { RouterModule } from "@angular/router";
 interface SidebarItem {
   label: string;
   path: string;
+  icon?: string;
 }
 
 interface SidebarItems {
@@ -21,17 +22,22 @@ interface SidebarItems {
 export class SidebarComponent {
   sidebarItems: SidebarItems = {
     Data: [
-      { label: "Users", path: "/users" },
-      { label: "Collections", path: "/collections" },
-      { label: "Tokens", path: "/tokens" },
+      { label: "Users", path: "/users", icon: "person" },
+      { label: "Collections", path: "/collections", icon: "folder" },
+      { label: "Tokens", path: "/tokens", icon: "stars" },
+      { label: "Posts", path: "/posts", icon: "post" },
     ],
     Contact: [
-      { label: "Complaints", path: "/complaints" },
-      { label: "Feedback", path: "/feedback" },
+      {
+        label: "Complaints",
+        path: "/complaints",
+        icon: "sentiment_dissatisfied",
+      },
+      { label: "Feedback", path: "/feedback", icon: "feedback" },
     ],
     Chart: [
-      { label: "Stats", path: "/stats" },
-      { label: "Graphs", path: "/graphs" },
+      { label: "Stats", path: "/stats", icon: "monitoring" },
+      { label: "Analytics", path: "/analytics", icon: "analytics" },
     ],
   };
 

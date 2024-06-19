@@ -1,7 +1,20 @@
-<div *ngIf="tokens; else loading">
-	<div *ngFor="let token of tokens">{{ token.title }}</div>
+<div *ngIf="!loading; else spinner" class="flex flex-col h-full">
+  <ag-grid-angular
+    style="height: 100%; padding-right: 1.5rem"
+    [class]="themeClass"
+    [rowData]="tokens"
+    [columnDefs]="colDefs"
+    [defaultColDef]="defaultColDef"
+    rowSelection="single"
+  >
+  </ag-grid-angular>
+</div>
+<ng-template #spinner>
+  <div *ngIf="errorMessage" class="text-white">{{ errorMessage }}</div>
+  <div
+    *ngIf="!errorMessage"
+    class="text-white h-full flex justify-center items-center"
+  >
+    <ns-spinner class="" />
   </div>
-  <ng-template #loading>
-	<div *ngIf="errorMessage">{{ errorMessage }}</div>
-	<div *ngIf="!errorMessage">Loading...</div>
-  </ng-template>
+</ng-template>

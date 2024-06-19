@@ -1,13 +1,15 @@
-<div *ngIf="collections; else loading" class="flex flex-col h-full">
+<div *ngIf="!loading; else spinner" class="flex flex-col h-full">
   <ag-grid-angular
-    style="height: 100%"
+    style="height: 100%; padding-right: 1.5rem"
     [class]="themeClass"
     [rowData]="collections"
     [columnDefs]="colDefs"
+    [defaultColDef]="defaultColDef"
+    rowSelection="single"
   >
   </ag-grid-angular>
 </div>
-<ng-template #loading>
+<ng-template #spinner>
   <div *ngIf="errorMessage" class="text-white">{{ errorMessage }}</div>
   <div
     *ngIf="!errorMessage"

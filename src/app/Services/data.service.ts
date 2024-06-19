@@ -3,6 +3,9 @@ import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { catchError, Observable, throwError } from "rxjs";
 import { environment } from "../../environments/environment";
 import { Collection } from "../Models/collection.model";
+import { User } from "../Models/user.model";
+import { Post } from "../Models/post.model";
+import { Token } from "../Models/token.model";
 
 @Injectable({
   providedIn: "root",
@@ -42,11 +45,15 @@ export class DataService {
   }
 
   getTokens(): Observable<any> {
-    return this.get<any>("token/all");
+    return this.get<Token[]>("token/all");
   }
 
   getUsers(): Observable<any> {
-    return this.get<any>("user/all");
+    return this.get<User[]>("user/all");
+  }
+
+  getPosts(): Observable<any> {
+    return this.get<Post[]>("post/all");
   }
   // // Method to fetch data by ID
   // getItemById<T>(endpoint: string, id: number): Observable<T> {

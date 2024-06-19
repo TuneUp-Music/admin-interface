@@ -6,6 +6,7 @@ import { PostPage } from "./Pages/Post/post.page";
 import { AuthPage } from "./Pages/Auth/auth.page";
 import { LayoutComponent } from "./Components/Layout/layout.component";
 import { HomePage } from "./Pages/Home/home.page";
+import { authGuard, loggedInGuard } from "./Services/auth.guard";
 
 export const appRoutes: Routes = [
   {
@@ -22,11 +23,13 @@ export const appRoutes: Routes = [
       { path: "tokens", component: TokenPage, title: "Token Page" },
       { path: "posts", component: PostPage, title: "Post Page" },
     ],
+    canActivateChild: [authGuard],
   },
   {
     path: "auth",
     component: AuthPage,
     title: "Auth Page",
+    canActivate: [loggedInGuard],
   },
   // { path: "complaints", component: PostPage, title: "Post Page"},
   // { path: "feedback", component: PostPage, title: "Post Page"},

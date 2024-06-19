@@ -1,10 +1,35 @@
-<div class="flex-1 ml-64 p-8">
-  <h1 class="font-bold text-xl mb-4 text-white">Main Content Area</h1>
-  <p class="text-white">
-    This is the main area of your website where detailed content would be
-    displayed. It starts next to the sidebar and occupies the remaining space.
-    This area is designed to be scrollable if the content exceeds the viewport
-    height.
-  </p>
-  <p class="mt-2 text-white">More content here...</p>
+<style>
+  :host {
+    width: 100%;
+    height: 100%;
+    max-height: 100%;
+  }
+</style>
+<div class="flex w-full h-full flex-col items-center">
+  <form
+    [formGroup]="form"
+    (ngSubmit)="onSubmit()"
+    class="mt-72 flex flex-col items-center"
+  >
+    <h1 class="text-3xl text-white mb-6">Tune'up Admin</h1>
+    <input
+      type="text"
+      class="border border-gray-300 p-2 w-4/5 rounded-sm text-gray-500"
+      placeholder="Login"
+      formControlName="login"
+    />
+    <input
+      type="password"
+      class="border border-gray-300 p-2 w-4/5 mt-4 rounded-sm"
+      placeholder="Password"
+      wire:model="password"
+      formControlName="password"
+    />
+    <button
+      class="bg-slate-800 text-white p-2 w-4/5 mt-4 rounded-sm hover:bg-slate-700"
+      type="submit"
+    >
+      Login
+    </button>
+  </form>
 </div>

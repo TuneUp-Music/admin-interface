@@ -6,6 +6,7 @@ import { Collection } from "../Models/collection.model";
 import { User } from "../Models/user.model";
 import { Post } from "../Models/post.model";
 import { Token } from "../Models/token.model";
+import { FormGroup } from "@angular/forms";
 
 @Injectable({
   providedIn: "root",
@@ -14,7 +15,6 @@ export class DataService {
   constructor(private http: HttpClient) {}
   private baseUrl = environment.apiUrl;
 
-  // Generic GET method
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       console.error("An error occurred:", error.error.message);
@@ -29,34 +29,45 @@ export class DataService {
   }
 
   get<T>(endpoint: string): Observable<T> {
-    // console.log(`fetching data from ${this.baseUrl}/${endpoint}`);
     return this.http
       .get<T>(`${this.baseUrl}/${endpoint}`)
       .pipe(catchError(this.handleError));
   }
 
-  // // You can add more specific methods as needed
-  // getUsers(): Observable<any> {
-  //   return this.get<any>("collections/all");
-  // }
-
-  getCollections(): Observable<any> {
+  getCollections(): Observable<Collection[]> {
     return this.get<Collection[]>("collection/all");
   }
 
-  getTokens(): Observable<any> {
+  getTokens(): Observable<Token[]> {
     return this.get<Token[]>("token/all");
   }
 
-  getUsers(): Observable<any> {
+  getUsers(): Observable<User[]> {
     return this.get<User[]>("user/all");
   }
 
-  getPosts(): Observable<any> {
+  getUser(): Observable<User> {
+    return this.get<User>("admin");
+  }
+
+  getPosts(): Observable<Post[]> {
     return this.get<Post[]>("post/all");
   }
-  // // Method to fetch data by ID
-  // getItemById<T>(endpoint: string, id: number): Observable<T> {
-  //   return this.http.get<T>(`${this.baseUrl}/${endpoint}/${id}`);
-  // }
+
+  login(form: FormGroup): Observable<any> {
+    return this.http
+      .post<any>(
+        `${this.baseUrl}/auth/login?remember_me=true`,
+        form.getRawValue()
+      )
+      .pipe(catchError(this.handleError));
+  }
+
+  refreshToken(): Observable<any> {
+    return this.http
+      .post<any>(`${this.baseUrl}/auth/refresh`, {
+        refresh_token: localStorage.getItem("refresh_token"),
+      })
+      .pipe(catchError(this.handleError));
+  }
 }

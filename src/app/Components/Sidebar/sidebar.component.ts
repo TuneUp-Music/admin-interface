@@ -1,7 +1,8 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, inject } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { Router } from "@angular/router";
-import { RouterModule } from "@angular/router";
+import { NavigationEnd, Router, RouterModule } from "@angular/router";
+import { AuthService } from "../../Services/auth.service";
+import { DataService } from "../../Services/data.service";
 
 interface SidebarItem {
   label: string;
@@ -20,6 +21,12 @@ interface SidebarItems {
   imports: [CommonModule, RouterModule],
 })
 export class SidebarComponent {
+  authService = inject(AuthService);
+  router = inject(Router);
+  currentUrl!: string;
+  user: any = null;
+  errorMessage: string | null = null;
+
   sidebarItems: SidebarItems = {
     Data: [
       { label: "Users", path: "/users", icon: "person" },
@@ -41,7 +48,40 @@ export class SidebarComponent {
     ],
   };
 
-  constructor() {}
+  constructor(private dataService: DataService) {
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.currentUrl = event.url;
+      }
+    });
+  }
+
+  ngOnInit() {
+    // this.loading = true;
+    this.dataService.getUser().subscribe({
+      next: (data: any) => {
+        this.user = data;
+        this.errorMessage = null;
+        // this.loading = false;
+      },
+      error: (e: any) => {
+        this.errorMessage = e.message;
+        this.user = null;
+        // this.loading = false;
+      },
+    });
+  }
+
+  isActive(path: string): boolean {
+    return this.currentUrl === path;
+  }
+
+  logout() {
+    localStorage.removeItem("token");
+    localStorage.removeItem("refresh_token");
+    this.authService.currentUserSig.set(null);
+    this.router.navigate(["/auth"]);
+  }
 
   getKeys(obj: SidebarItems): string[] {
     return Object.keys(obj);

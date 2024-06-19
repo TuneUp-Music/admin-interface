@@ -77,7 +77,6 @@ export class UsersComponent implements OnInit {
       field: key as string,
       headerName: this.formatHeaderName(key),
     }));
-    console.log(this.colDefs);
   }
 
   formatHeaderName(field: string): string {

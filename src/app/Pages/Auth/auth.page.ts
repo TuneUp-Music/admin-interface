@@ -49,7 +49,7 @@ export class AuthPage {
         }
       },
       error: (e) => {
-        console.error(e);
+        this.openSnackBar(e.error, "Close");
       },
     });
   }

@@ -49,11 +49,8 @@
   <h2 class="text-green-300 text-center mt-1 text-md">Admin</h2>
   <button
     [routerLink]="['/']"
-    class="mt-5 flex py-2 pl-3 ml-3 rounded-md"
-    [ngClass]="{
-      'text-white hover:bg-slate-700': true,
-      'text-green-300': isActive('/')
-    }"
+    class="mt-5 flex py-2 pl-3 ml-3 rounded-md hover:bg-slate-700"
+    [ngClass]="isActive('/') ? 'text-green-300' : 'text-white'"
   >
     <span class="material-symbols-outlined pr-2">home</span>
     Dashboard

@@ -55,12 +55,10 @@ export class DataService {
   }
 
   login(form: FormGroup): Observable<any> {
-    return this.http
-      .post<any>(
-        `${this.baseUrl}/auth/login?remember_me=true`,
-        form.getRawValue()
-      )
-      .pipe(catchError(this.handleError));
+    return this.http.post<any>(
+      `${this.baseUrl}/auth/login?remember_me=true`,
+      form.getRawValue()
+    );
   }
 
   refreshToken(): Observable<any> {

@@ -1,3 +1,11 @@
+<style>
+  ::ng-deep .ag-row-selected::before {
+    background-color: rgba(134, 239, 173, 0.55);
+  }
+  ::ng-deep .ag-theme-quartz-dark .ag-row-hover {
+    background-color: rgba(134, 239, 173, 0.55);
+  }
+</style>
 <div *ngIf="!loading; else spinner" class="flex flex-col h-full">
   <ag-grid-angular
     style="height: 100%; padding-right: 1.5rem"

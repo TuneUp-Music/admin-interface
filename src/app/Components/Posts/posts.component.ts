@@ -64,7 +64,7 @@ export class PostsComponent implements OnInit {
 
   generateColDefs(): void {
     this.colDefs = this.PostKeys.map((key, value) => ({
-      checkboxSelection: key === "_	id" ? true : false,
+      checkboxSelection: key === "_id" ? true : false,
       field: key as string,
       headerName: this.formatHeaderName(key),
     }));

@@ -1,0 +1,9 @@
+version: "3.9"
+services:
+  front-admin:
+    build: 
+      context: ./
+    restart: always
+    pull_policy: build
+    volumes:
+      - ./dist/interface_admin/browser:/var/www/admin.tuneup-music.com/html

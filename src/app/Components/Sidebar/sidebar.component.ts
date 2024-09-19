@@ -36,11 +36,11 @@ export class SidebarComponent {
       { label: "Posts", path: "/posts", icon: "post" },
     ],
     Contact: [
-      {
-        label: "Complaints",
-        path: "/complaints",
-        icon: "sentiment_dissatisfied",
-      },
+      // {
+      //   label: "Complaints",
+      //   path: "/complaints",
+      //   icon: "sentiment_dissatisfied",
+      // },
       { label: "Feedback", path: "/feedback", icon: "feedback" },
     ],
     Chart: [

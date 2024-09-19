@@ -7,6 +7,7 @@ import { User } from "../Models/user.model";
 import { Post } from "../Models/post.model";
 import { Token } from "../Models/token.model";
 import { FormGroup } from "@angular/forms";
+import { Feedback } from "../Models/feedback.model";
 
 @Injectable({
   providedIn: "root",
@@ -52,6 +53,10 @@ export class DataService {
 
   getPosts(): Observable<Post[]> {
     return this.get<Post[]>("post/all");
+  }
+
+  getFeedbacks(): Observable<Feedback[]> {
+    return this.get<Feedback[]>("admin/feedback/all");
   }
 
   login(form: FormGroup): Observable<any> {

@@ -1,0 +1,18 @@
+<div *ngIf="!loading; else spinner" class="flex flex-col h-full">
+  <ag-grid-angular
+    style="height: 100%; padding-right: 1.5rem"
+    [class]="themeClass"
+    [rowData]="feedbacks"
+    [columnDefs]="colDefs"
+    [defaultColDef]="defaultColDef"
+    rowSelection="single"
+  >
+  </ag-grid-angular>
+</div>
+<ng-template #spinner>
+  <div
+    class="h-full w-full flex pr-6 bg-slate-800 rounded-md justify-center items-center"
+  >
+    <ns-spinner />
+  </div>
+</ng-template>

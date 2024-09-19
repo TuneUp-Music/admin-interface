@@ -7,6 +7,7 @@ import { AuthPage } from "./Pages/Auth/auth.page";
 import { LayoutComponent } from "./Components/Layout/layout.component";
 import { HomePage } from "./Pages/Home/home.page";
 import { authGuard, loggedInGuard } from "./Services/auth.guard";
+import { FeedbackPage } from "./Pages/Feedback/feedback.page";
 
 export const appRoutes: Routes = [
   {
@@ -22,6 +23,7 @@ export const appRoutes: Routes = [
       { path: "users", component: UserPage, title: "User Page" },
       { path: "tokens", component: TokenPage, title: "Token Page" },
       { path: "posts", component: PostPage, title: "Post Page" },
+      { path: "feedback", component: FeedbackPage, title: "Feedbacks Page" },
     ],
     canActivateChild: [authGuard],
   },
@@ -32,7 +34,7 @@ export const appRoutes: Routes = [
     canActivate: [loggedInGuard],
   },
   // { path: "complaints", component: PostPage, title: "Post Page"},
-  // { path: "feedback", component: PostPage, title: "Post Page"},
+  // { path: "feedback", component: FeedbackPage, title: "Feedbacks Page" },
   // { path: "stats", component: PostPage, title: "Post Page"},
   // { path: "analytics", component: PostPage, title: "Post Page"},
 ];

@@ -48,7 +48,6 @@ export class FeedbacksComponent implements OnInit {
         this.feedbacks = data;
         this.errorMessage = null;
         this.loading = false;
-        console.log(this.feedbacks);
       },
       error: (e) => {
         this.errorMessage = e.message;
